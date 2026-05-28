@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HubSpot Font Header Generator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Serif+Display&display=swap" rel="stylesheet" />
+
+  <!-- DA California Palms custom font -->
+  <style>
+    @font-face {
+      font-family: 'California Palms';
+      src: url('https://hsoffer.destinationaesthetics.com/hubfs/Destination%20Aesthetics/DA%20Font%20California%20Palms/CaliforniaPalms_Script_thicker.woff2') format('woff2');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+  </style>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f5f4f0;
+      --surface: #ffffff;
+      --surface-alt: #f0efe9;
+      --border: #e2e0d8;
+      --border-strong: #c8c6bc;
+      --text-primary: #1a1916;
+      --text-secondary: #6b6a64;
+      --text-hint: #a09f99;
+      --accent: #2a5fff;
+      --accent-light: #eef1ff;
+      --accent-text: #1a3fbf;
+      --success: #1a7a4a;
+      --success-bg: #eaf5ee;
+      --error: #c0392b;
+      --error-bg: #fdf0ee;
+      --da: #8b6f4e;
+      --da-bg: #faf6f0;
+      --da-border: #e8d8c4;
+      --mono: 'Courier New', monospace;
+      --sans: 'DM Sans', sans-serif;
+      --serif: 'DM Serif Display', serif;
+      --radius: 10px;
+      --radius-sm: 6px;
+    }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text-primary);
+      min-height: 100vh;
+    }
+
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 1.25rem 2rem;
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+    }
+
+    header h1 {
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      font-weight: 400;
+      color: var(--text-primary);
+      letter-spacing: -0.01em;
+    }
+
+    header span {
+      font-size: 0.75rem;
+      color: var(--text-hint);
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    main {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .step-label {
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-hint);
+      margin-bottom: 0.75rem;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+    }
+
+    .font-section-title {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-bottom: 0.875rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .font-section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 1.25rem 0;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .field label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    .field input[type="text"] {
+      font-family: var(--sans);
+      font-size: 0.875rem;
+      color: var(--text-primary);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 9px 12px;
+      outline: none;
+      transition: border-color 0.15s;
+      width: 100%;
+    }
+
+    .field input[type="text"]:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(42, 95, 255, 0.08);
+    }
+
+    .field input[type="text"]::placeholder { color: var(--text-hint); }
+
+    .hint { font-size: 0.7rem; color: var(--text-hint); line-height: 1.4; }
+
+    .status {
+      font-size: 0.7rem;
+      padding: 3px 9px;
+      border-radius: 20px;
+      margin-top: 2px;
+      display: inline-block;
+      width: fit-content;
+    }
+    .status.loading { background: var(--surface-alt); color: var(--text-hint); border: 1px solid var(--border); }
+    .status.found   { background: var(--success-bg); color: var(--success); border: 1px solid #b6dfc8; }
+    .status.error   { background: var(--error-bg);   color: var(--error);   border: 1px solid #f5c4bc; }
+    .status.hidden  { display: none; }
+
+    .preview-pill {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      margin-top: 8px;
+    }
+
+    .preview-label {
+      font-size: 0.68rem;
+      color: var(--text-hint);
+      white-space: nowrap;
+      font-family: var(--sans);
+    }
+
+    .preview-text {
+      font-size: 1.1rem;
+      color: var(--text-primary);
+      flex: 1;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    /* DA preset button */
+    .preset-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .preset-label {
+      font-size: 0.7rem;
+      color: var(--text-hint);
+      white-space: nowrap;
+    }
+
+    .preset-btn {
+      font-family: var(--sans);
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 5px 12px;
+      border-radius: 20px;
+      border: 1px solid var(--da-border);
+      background: var(--da-bg);
+      color: var(--da);
+      cursor: pointer;
+      transition: opacity 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .preset-btn:hover { opacity: 0.75; }
+
+    .preset-btn .ca-preview {
+      font-family: 'California Palms', cursive;
+      font-size: 1rem;
+      line-height: 1;
+    }
+
+    /* Same-as toggle */
+    .same-as {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 0.875rem;
+    }
+
+    .same-as input[type="checkbox"] {
+      accent-color: var(--accent);
+      width: 14px;
+      height: 14px;
+      cursor: pointer;
+    }
+
+    .same-as label {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      cursor: pointer;
+    }
+
+    .font-block { transition: opacity 0.2s; }
+    .font-block.dimmed { opacity: 0.35; pointer-events: none; }
+
+    /* Output */
+    .output-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .output-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.875rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface-alt);
+    }
+
+    .output-header p {
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-hint);
+    }
+
+    .dots { display: flex; gap: 5px; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--border-strong); }
+
+    pre#output {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      padding: 1.25rem 1.5rem;
+      line-height: 1.75;
+      white-space: pre;
+      overflow-x: auto;
+      background: var(--surface);
+      min-height: 140px;
+    }
+
+    .output-footer {
+      padding: 0.875rem 1.25rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    button#copyBtn {
+      font-family: var(--sans);
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--surface);
+      background: var(--accent);
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: 8px 18px;
+      cursor: pointer;
+      transition: opacity 0.15s, transform 0.1s;
+    }
+
+    button#copyBtn:hover { opacity: 0.88; }
+    button#copyBtn:active { transform: scale(0.97); }
+
+    #copied {
+      font-size: 0.78rem;
+      color: var(--success);
+      background: var(--success-bg);
+      padding: 4px 10px;
+      border-radius: 20px;
+      display: none;
+    }
+
+    .info-strip {
+      background: var(--accent-light);
+      border: 1px solid #c5d0ff;
+      border-radius: var(--radius-sm);
+      padding: 0.75rem 1rem;
+      font-size: 0.78rem;
+      color: var(--accent-text);
+      line-height: 1.6;
+    }
+
+    .info-strip strong { font-weight: 500; }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.72rem;
+      color: var(--text-hint);
+    }
+
+    @media (max-width: 560px) {
+      header { padding: 1rem; }
+      main { padding: 1.5rem 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>HubSpot Font Header Generator</h1>
+  <span>Marketing Tools</span>
+</header>
+
+<main>
+
+  <div class="info-strip">
+    <strong>How to use:</strong> Type a Google Font name — it loads automatically and a live preview appears. Or select a brand preset below. Copy the generated HTML and paste it into your HubSpot landing page under <strong>Settings &rarr; Advanced &rarr; Head HTML</strong>.
+  </div>
+
+  <div class="card">
+    <p class="step-label">Step 1 — Enter your fonts</p>
+
+    <!-- Brand presets -->
+    <div class="preset-row">
+      <span class="preset-label">Brand presets:</span>
+      <button class="preset-btn" onclick="applyDAPreset('h')">
+        <span class="ca-preview">Aa</span> DA — California Palms (H1 &amp; H2)
+      </button>
+      <button class="preset-btn" onclick="applyDAPreset('h4')">
+        <span class="ca-preview">Aa</span> DA — California Palms (H4)
+      </button>
+      <button class="preset-btn" onclick="applyDAPreset('b')">
+        <span class="ca-preview">Aa</span> DA — California Palms (Body)
+      </button>
+    </div>
+
+    <!-- H1 / H2 -->
+    <p class="font-section-title">H1 &amp; H2 — Primary headings</p>
+    <div class="font-block" id="hBlock">
+      <div class="field">
+        <label>Font name</label>
+        <input type="text" id="hFont" placeholder="e.g. Playfair Display" oninput="debounce('h')" autocomplete="off" spellcheck="false" />
+        <span class="hint">Type any Google Fonts name</span>
+        <span class="status hidden" id="hStatus"></span>
+      </div>
+      <div id="hPreview" style="display:none;" class="preview-pill">
+        <span class="preview-label">Preview:</span>
+        <span class="preview-text" id="hPreviewText">The quick brown fox jumps over the lazy dog</span>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- H4 -->
+    <p class="font-section-title">H4 — Subheading</p>
+    <div class="same-as">
+      <input type="checkbox" id="h4SameAsH1" onchange="toggleSameAs('h4')" />
+      <label for="h4SameAsH1">Same as H1 &amp; H2</label>
+    </div>
+    <div class="font-block" id="h4Block">
+      <div class="field">
+        <label>Font name</label>
+        <input type="text" id="h4Font" placeholder="e.g. Lato" oninput="debounce('h4')" autocomplete="off" spellcheck="false" />
+        <span class="hint">Type any Google Fonts name</span>
+        <span class="status hidden" id="h4Status"></span>
+      </div>
+      <div id="h4Preview" style="display:none;" class="preview-pill">
+        <span class="preview-label">Preview:</span>
+        <span class="preview-text" id="h4PreviewText">The quick brown fox jumps over the lazy dog</span>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Body -->
+    <p class="font-section-title">Body / subtext</p>
+    <div class="same-as">
+      <input type="checkbox" id="bSameAsH1" onchange="toggleSameAs('b')" />
+      <label for="bSameAsH1">Same as H1 &amp; H2</label>
+    </div>
+    <div class="font-block" id="bBlock">
+      <div class="field">
+        <label>Font name</label>
+        <input type="text" id="bFont" placeholder="e.g. Open Sans" oninput="debounce('b')" autocomplete="off" spellcheck="false" />
+        <span class="hint">Applied to paragraphs and subtext</span>
+        <span class="status hidden" id="bStatus"></span>
+      </div>
+      <div id="bPreview" style="display:none;" class="preview-pill">
+        <span class="preview-label">Preview:</span>
+        <span class="preview-text" id="bPreviewText">The quick brown fox jumps over the lazy dog</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="output-card">
+    <div class="output-header">
+      <p>Step 2 — Copy your header HTML</p>
+      <div class="dots">
+        <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      </div>
+    </div>
+    <pre id="output"></pre>
+    <div class="output-footer">
+      <button id="copyBtn" onclick="copyIt()">Copy HTML</button>
+      <span id="copied">Copied to clipboard!</span>
+    </div>
+  </div>
+
+</main>
+
+<footer>AMP Marketing Tools &mdash; HubSpot Font Header Generator</footer>
+
+<script>
+  const DA_FONT = {
+    family: 'California Palms',
+    url: null, // self-hosted via @font-face, no Google Fonts link needed
+    woff2: 'https://hsoffer.destinationaesthetics.com/hubfs/Destination%20Aesthetics/DA%20Font%20California%20Palms/CaliforniaPalms_Script_thicker.woff2'
+  };
+
+  const state = {
+    h:  { url: '', family: '', custom: null },
+    h4: { url: '', family: '', custom: null },
+    b:  { url: '', family: '', custom: null }
+  };
+  const timers = {};
+  const sameAs = { h4: false, b: false };
+
+  function slugify(name) {
+    return name.trim().replace(/\s+/g, '+');
+  }
+
+  // Apply DA California Palms preset to a slot
+  function applyDAPreset(key) {
+    // Uncheck "same as" if set
+    if (key === 'h4' && sameAs.h4) {
+      document.getElementById('h4SameAsH1').checked = false;
+      sameAs.h4 = false;
+      document.getElementById('h4Block').classList.remove('dimmed');
+    }
+    if (key === 'b' && sameAs.b) {
+      document.getElementById('bSameAsH1').checked = false;
+      sameAs.b = false;
+      document.getElementById('bBlock').classList.remove('dimmed');
+    }
+
+    const input     = document.getElementById(key + 'Font');
+    const statusEl  = document.getElementById(key + 'Status');
+    const previewEl = document.getElementById(key + 'Preview');
+    const previewTx = document.getElementById(key + 'PreviewText');
+
+    input.value = DA_FONT.family;
+    state[key]  = { url: null, family: DA_FONT.family, custom: DA_FONT.woff2 };
+
+    statusEl.textContent = 'DA brand font applied \u2713';
+    statusEl.className = 'status found';
+
+    previewTx.style.fontFamily = `'California Palms', cursive`;
+    previewEl.style.display = 'flex';
+
+    gen();
+  }
+
+  function toggleSameAs(key) {
+    sameAs[key] = document.getElementById(key === 'h4' ? 'h4SameAsH1' : 'bSameAsH1').checked;
+    const block = document.getElementById(key + 'Block');
+    if (sameAs[key]) {
+      block.classList.add('dimmed');
+      state[key] = { url: '', family: '', custom: null };
+    } else {
+      block.classList.remove('dimmed');
+    }
+    gen();
+  }
+
+  function debounce(key) {
+    clearTimeout(timers[key]);
+    const name = document.getElementById(key + 'Font').value.trim();
+    if (!name) {
+      state[key] = { url: '', family: '', custom: null };
+      document.getElementById(key + 'Status').className = 'status hidden';
+      document.getElementById(key + 'Preview').style.display = 'none';
+      const old = document.getElementById('gf-link-' + key);
+      if (old) old.remove();
+      gen();
+      return;
+    }
+    // If they cleared the DA preset by typing something new, reset custom
+    state[key].custom = null;
+    document.getElementById(key + 'Status').textContent = 'Looking up font...';
+    document.getElementById(key + 'Status').className = 'status loading';
+    timers[key] = setTimeout(() => loadFont(key), 600);
+  }
+
+  function loadFont(key) {
+    const name      = document.getElementById(key + 'Font').value.trim();
+    const statusEl  = document.getElementById(key + 'Status');
+    const previewEl = document.getElementById(key + 'Preview');
+    const previewTx = document.getElementById(key + 'PreviewText');
+
+    const slug     = slugify(name);
+    const embedUrl = `https://fonts.googleapis.com/css2?family=${slug}:wght@400;700&display=swap`;
+
+    const old = document.getElementById('gf-link-' + key);
+    if (old) old.remove();
+
+    const link = document.createElement('link');
+    link.id  = 'gf-link-' + key;
+    link.rel = 'stylesheet';
+    link.href = embedUrl;
+    document.head.appendChild(link);
+
+    setTimeout(() => {
+      document.fonts.load(`16px '${name}'`).then((fonts) => {
+        if (fonts.length > 0) {
+          state[key] = { url: embedUrl, family: name, custom: null };
+          statusEl.textContent = 'Font found \u2713';
+          statusEl.className = 'status found';
+          previewTx.style.fontFamily = `'${name}', serif`;
+          previewEl.style.display = 'flex';
+        } else {
+          state[key] = { url: '', family: '', custom: null };
+          statusEl.textContent = 'Font not found \u2014 check spelling on fonts.google.com';
+          statusEl.className = 'status error';
+          previewEl.style.display = 'none';
+          link.remove();
+        }
+        gen();
+      }).catch(() => {
+        state[key] = { url: '', family: '', custom: null };
+        statusEl.textContent = 'Font not found \u2014 check spelling on fonts.google.com';
+        statusEl.className = 'status error';
+        previewEl.style.display = 'none';
+        link.remove();
+        gen();
+      });
+    }, 800);
+  }
+
+  function gen() {
+    // Resolve families
+    const resolve = (key, fallback) => {
+      if (sameAs[key]) {
+        return state.h.family ? `'${state.h.family}', serif` : fallback;
+      }
+      if (state[key].family) {
+        return `'${state[key].family}', ${state[key].custom ? 'cursive' : 'serif'}`;
+      }
+      const raw = document.getElementById(key + 'Font').value.trim();
+      return raw ? `'${raw}', serif` : fallback;
+    };
+
+    const hFamily  = resolve('h',  'YOUR_H1_H2_FONT, serif');
+    const h4Family = resolve('h4', 'YOUR_H4_FONT, serif');
+    const bFamily  = (() => {
+      if (sameAs.b) return state.h.family ? `'${state.h.family}', serif` : 'YOUR_H1_H2_FONT, serif';
+      if (state.b.family) return `'${state.b.family}', ${state.b.custom ? 'cursive' : 'sans-serif'}`;
+      const raw = document.getElementById('bFont').value.trim();
+      return raw ? `'${raw}', sans-serif` : 'YOUR_BODY_FONT, sans-serif';
+    })();
+
+    // Build link / @font-face lines
+    const linkLines = [];
+    const usedUrls  = new Set();
+    const usedCustom = new Set();
+    let needsPreconnect = true;
+
+    const addSlot = (key) => {
+      const s = sameAs[key] ? state.h : state[key];
+      if (!s) return;
+      if (s.custom && !usedCustom.has(s.custom)) {
+        linkLines.push(
+          `  <style>\n    @font-face {\n      font-family: '${s.family}';\n      src: url('${s.custom}') format('woff2');\n      font-weight: normal;\n      font-style: normal;\n      font-display: swap;\n    }\n  </style>`
+        );
+        usedCustom.add(s.custom);
+      } else if (s.url && !usedUrls.has(s.url)) {
+        if (needsPreconnect) {
+          linkLines.push(`  <link rel="preconnect" href="https://fonts.googleapis.com">`);
+          linkLines.push(`  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>`);
+          needsPreconnect = false;
+        }
+        linkLines.push(`  <link href="${s.url}" rel="stylesheet">`);
+        usedUrls.add(s.url);
+      }
+    };
+
+    addSlot('h');
+    if (!sameAs.h4) addSlot('h4');
+    if (!sameAs.b)  addSlot('b');
+
+    if (linkLines.length === 0) {
+      linkLines.push(`  <!-- Font tags will appear here once fonts are confirmed -->`);
+    }
+
+    const h4Rule = (sameAs.h4 || h4Family === hFamily)
+      ? ''
+      : `\n    h4 {\n      font-family: ${h4Family};\n    }\n`;
+
+    document.getElementById('output').textContent =
+`<head>
+${linkLines.join('\n')}
+
+  <style>
+    h1, h2 {
+      font-family: ${hFamily};
+    }
+${h4Rule}
+    p, span, li, blockquote {
+      font-family: ${bFamily};
+    }
+  </style>
+</head>`;
+  }
+
+  gen();
+</script>
+
+</body>
+</html>
