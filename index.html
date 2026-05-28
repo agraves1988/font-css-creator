@@ -568,7 +568,7 @@
       }
 
       const fallback = s.key === 'p' ? 'sans-serif' : (effective.custom ? 'cursive' : 'serif');
-      cssRules.push(`    ${s.tag} {\n      font-family: '${effective.family}', ${fallback};\n    }`);
+      cssRules.push(`    ${s.tag} {\n      font-family: '${effective.family}', ${fallback} !important;\n    }`);
     });
 
     if (linkLines.length === 0 && cssRules.length === 0) {
