@@ -44,12 +44,7 @@
       --radius-sm: 6px;
     }
 
-    body {
-      font-family: var(--sans);
-      background: var(--bg);
-      color: var(--text-primary);
-      min-height: 100vh;
-    }
+    body { font-family: var(--sans); background: var(--bg); color: var(--text-primary); min-height: 100vh; }
 
     header {
       background: var(--surface);
@@ -60,7 +55,6 @@
       gap: 1rem;
       flex-wrap: wrap;
     }
-
     header h1 {
       font-family: var(--serif);
       font-size: 1.35rem;
@@ -68,7 +62,6 @@
       color: var(--text-primary);
       letter-spacing: -0.01em;
     }
-
     header span {
       font-size: 0.75rem;
       color: var(--text-hint);
@@ -114,7 +107,7 @@
       margin-bottom: 1rem;
     }
 
-    /* Preset row */
+    /* Presets */
     .preset-row {
       display: flex;
       align-items: center;
@@ -122,11 +115,7 @@
       margin-bottom: 1.25rem;
       flex-wrap: wrap;
     }
-    .preset-label {
-      font-size: 0.7rem;
-      color: var(--text-hint);
-      white-space: nowrap;
-    }
+    .preset-label { font-size: 0.7rem; color: var(--text-hint); white-space: nowrap; }
     .preset-btn {
       font-family: var(--sans);
       font-size: 0.75rem;
@@ -145,7 +134,7 @@
     .preset-btn:hover { opacity: 0.75; }
     .preset-btn .cp { font-family: 'California Palms', cursive; font-size: 1.05rem; line-height: 1; }
 
-    /* Font slot rows */
+    /* Slot rows */
     .slot {
       border-top: 1px solid var(--border);
       padding-top: 1rem;
@@ -155,13 +144,9 @@
       gap: 0 1.25rem;
       align-items: start;
     }
-
     .slot:first-of-type { border-top: none; padding-top: 0; margin-top: 0; }
 
-    .slot-label {
-      padding-top: 10px;
-    }
-
+    .slot-label { padding-top: 10px; }
     .slot-label .tag {
       display: inline-block;
       font-family: var(--mono);
@@ -174,16 +159,10 @@
       padding: 2px 7px;
       margin-bottom: 4px;
     }
-
-    .slot-label .desc {
-      font-size: 0.68rem;
-      color: var(--text-hint);
-      line-height: 1.4;
-    }
+    .slot-label .desc { font-size: 0.68rem; color: var(--text-hint); line-height: 1.4; }
 
     .slot-right { display: flex; flex-direction: column; gap: 6px; }
 
-    /* Same-as row */
     .same-row {
       display: flex;
       align-items: center;
@@ -196,32 +175,51 @@
       cursor: pointer;
       flex-shrink: 0;
     }
-    .same-row label {
-      font-size: 0.72rem;
-      color: var(--text-secondary);
-      cursor: pointer;
-    }
+    .same-row label { font-size: 0.72rem; color: var(--text-secondary); cursor: pointer; }
 
-    .input-area { display: flex; flex-direction: column; gap: 4px; }
+    .input-area { display: flex; flex-direction: column; gap: 6px; }
     .input-area.dimmed { opacity: 0.35; pointer-events: none; }
 
-    .input-area input[type="text"] {
+    /* Font name + size side by side */
+    .input-row { display: grid; grid-template-columns: 1fr 110px; gap: 8px; align-items: end; }
+
+    .field-group { display: flex; flex-direction: column; gap: 4px; }
+    .field-group label { font-size: 0.68rem; color: var(--text-hint); }
+
+    .field-group input[type="text"],
+    .field-group input[type="number"] {
       font-family: var(--sans);
       font-size: 0.875rem;
       color: var(--text-primary);
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius-sm);
-      padding: 8px 12px;
+      padding: 8px 10px;
       outline: none;
       transition: border-color 0.15s;
       width: 100%;
     }
-    .input-area input[type="text"]:focus {
+    .field-group input[type="text"]:focus,
+    .field-group input[type="number"]:focus {
       border-color: var(--accent);
       box-shadow: 0 0 0 3px rgba(42,95,255,0.08);
     }
-    .input-area input[type="text"]::placeholder { color: var(--text-hint); }
+    .field-group input[type="text"]::placeholder { color: var(--text-hint); }
+    .field-group input[type="number"] { -moz-appearance: textfield; }
+    .field-group input[type="number"]::-webkit-inner-spin-button,
+    .field-group input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; }
+
+    .size-wrap { position: relative; }
+    .size-wrap input { padding-right: 26px !important; }
+    .size-wrap .unit {
+      position: absolute;
+      right: 9px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.68rem;
+      color: var(--text-hint);
+      pointer-events: none;
+    }
 
     .status {
       font-size: 0.68rem;
@@ -244,28 +242,11 @@
       border-radius: var(--radius-sm);
       padding: 8px 12px;
     }
-    .preview-pill .plabel {
-      font-size: 0.65rem;
-      color: var(--text-hint);
-      white-space: nowrap;
-      font-family: var(--sans);
-    }
-    .preview-pill .ptext {
-      font-size: 1rem;
-      color: var(--text-primary);
-      flex: 1;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-    }
+    .preview-pill .plabel { font-size: 0.65rem; color: var(--text-hint); white-space: nowrap; font-family: var(--sans); }
+    .preview-pill .ptext { font-size: 1rem; color: var(--text-primary); flex: 1; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 
     /* Output */
-    .output-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      overflow: hidden;
-    }
+    .output-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
     .output-header {
       display: flex;
       align-items: center;
@@ -274,16 +255,9 @@
       border-bottom: 1px solid var(--border);
       background: var(--surface-alt);
     }
-    .output-header p {
-      font-size: 0.65rem;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--text-hint);
-    }
+    .output-header p { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-hint); }
     .dots { display: flex; gap: 5px; }
     .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--border-strong); }
-
     pre#output {
       font-family: var(--mono);
       font-size: 0.76rem;
@@ -295,13 +269,7 @@
       background: var(--surface);
       min-height: 140px;
     }
-    .output-footer {
-      padding: 0.875rem 1.25rem;
-      border-top: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
+    .output-footer { padding: 0.875rem 1.25rem; border-top: 1px solid var(--border); display: flex; align-items: center; gap: 12px; }
     button#copyBtn {
       font-family: var(--sans);
       font-size: 0.8rem;
@@ -316,25 +284,14 @@
     }
     button#copyBtn:hover { opacity: 0.88; }
     button#copyBtn:active { transform: scale(0.97); }
-    #copied {
-      font-size: 0.78rem;
-      color: var(--success);
-      background: var(--success-bg);
-      padding: 4px 10px;
-      border-radius: 20px;
-      display: none;
-    }
+    #copied { font-size: 0.78rem; color: var(--success); background: var(--success-bg); padding: 4px 10px; border-radius: 20px; display: none; }
 
-    footer {
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.72rem;
-      color: var(--text-hint);
-    }
+    footer { text-align: center; padding: 2rem; font-size: 0.72rem; color: var(--text-hint); }
 
     @media (max-width: 580px) {
       .slot { grid-template-columns: 1fr; gap: 8px; }
       .slot-label { padding-top: 0; }
+      .input-row { grid-template-columns: 1fr 90px; }
       header { padding: 1rem; }
       main { padding: 1.5rem 1rem; }
     }
@@ -350,25 +307,23 @@
 <main>
 
   <div class="info-strip">
-    <strong>How to use:</strong> Type a Google Font name for each tag — it loads automatically and a live preview appears. Use the "Same as" checkboxes to reuse fonts across tags. Copy the generated HTML and paste it into your HubSpot landing page under <strong>Settings &rarr; Advanced &rarr; Head HTML</strong>.
+    <strong>How to use:</strong> Set a font and/or size for each tag. Copy the generated HTML and paste it into your HubSpot landing page under <strong>Settings &rarr; Advanced &rarr; Head HTML</strong>.
   </div>
 
   <div class="card">
     <p class="step-label">Step 1 — Configure fonts by tag</p>
 
-    <!-- DA Presets -->
     <div class="preset-row">
       <span class="preset-label">DA preset:</span>
-      <button class="preset-btn" onclick="applyDA('h1')"><span class="cp">Aa</span> California Palms → H1</button>
-      <button class="preset-btn" onclick="applyDA('h2')"><span class="cp">Aa</span> → H2</button>
-      <button class="preset-btn" onclick="applyDA('h3')"><span class="cp">Aa</span> → H3</button>
-      <button class="preset-btn" onclick="applyDA('h4')"><span class="cp">Aa</span> → H4</button>
-      <button class="preset-btn" onclick="applyDA('h5')"><span class="cp">Aa</span> → H5</button>
-      <button class="preset-btn" onclick="applyDA('h6')"><span class="cp">Aa</span> → H6</button>
-      <button class="preset-btn" onclick="applyDA('p')"><span class="cp">Aa</span> → P</button>
+      <button class="preset-btn" onclick="applyDA('h1')"><span class="cp">Aa</span> H1</button>
+      <button class="preset-btn" onclick="applyDA('h2')"><span class="cp">Aa</span> H2</button>
+      <button class="preset-btn" onclick="applyDA('h3')"><span class="cp">Aa</span> H3</button>
+      <button class="preset-btn" onclick="applyDA('h4')"><span class="cp">Aa</span> H4</button>
+      <button class="preset-btn" onclick="applyDA('h5')"><span class="cp">Aa</span> H5</button>
+      <button class="preset-btn" onclick="applyDA('h6')"><span class="cp">Aa</span> H6</button>
+      <button class="preset-btn" onclick="applyDA('p')"><span class="cp">Aa</span> P</button>
     </div>
 
-    <!-- Slots: h1 is the reference, all others can say "same as h1" -->
     <div id="slots-container"></div>
   </div>
 
@@ -390,13 +345,13 @@
 
 <script>
   const SLOTS = [
-    { key: 'h1', tag: 'h1', label: 'H1',        desc: 'Primary heading',   canSameAs: false },
-    { key: 'h2', tag: 'h2', label: 'H2',        desc: 'Secondary heading', canSameAs: true  },
-    { key: 'h3', tag: 'h3', label: 'H3',        desc: 'Tertiary heading',  canSameAs: true  },
-    { key: 'h4', tag: 'h4', label: 'H4',        desc: 'Subheading',        canSameAs: true  },
-    { key: 'h5', tag: 'h5', label: 'H5',        desc: 'Minor heading',     canSameAs: true  },
-    { key: 'h6', tag: 'h6', label: 'H6',        desc: 'Smallest heading',  canSameAs: true  },
-    { key: 'p',  tag: 'p, span, li, blockquote', label: 'P', desc: 'Body / paragraph', canSameAs: true  },
+    { key: 'h1', tag: 'h1',                   label: 'H1', desc: 'Primary heading (typically 36–48px)',   canSameAs: false },
+    { key: 'h2', tag: 'h2',                   label: 'H2', desc: 'Secondary heading (typically 28–36px)', canSameAs: true  },
+    { key: 'h3', tag: 'h3',                   label: 'H3', desc: 'Tertiary heading (typically 22–28px)',  canSameAs: true  },
+    { key: 'h4', tag: 'h4',                   label: 'H4', desc: 'Subheading (typically 18–22px)',        canSameAs: true  },
+    { key: 'h5', tag: 'h5',                   label: 'H5', desc: 'Minor heading (typically 16–18px)',     canSameAs: true  },
+    { key: 'h6', tag: 'h6',                   label: 'H6', desc: 'Smallest heading (typically 14–16px)',  canSameAs: true  },
+    { key: 'p',  tag: 'p, span, li, blockquote', label: 'P', desc: 'Body / paragraph (typically 14–18px)', canSameAs: true },
   ];
 
   const DA = {
@@ -404,9 +359,8 @@
     woff2: 'https://hsoffer.destinationaesthetics.com/hubfs/Destination%20Aesthetics/DA%20Font%20California%20Palms/CaliforniaPalms_Script_thicker.woff2'
   };
 
-  // state per key
   const state = {};
-  SLOTS.forEach(s => { state[s.key] = { family: '', url: '', custom: null, sameAs: false }; });
+  SLOTS.forEach(s => { state[s.key] = { family: '', url: '', custom: null, sameAs: false, size: '' }; });
 
   const timers = {};
 
@@ -428,7 +382,19 @@
           <label for="same-${s.key}">Same as &lt;h1&gt;</label>
         </div>` : ''}
         <div class="input-area" id="input-area-${s.key}">
-          <input type="text" id="input-${s.key}" placeholder="e.g. Playfair Display" oninput="debounce('${s.key}')" autocomplete="off" spellcheck="false" />
+          <div class="input-row">
+            <div class="field-group">
+              <label>Font name</label>
+              <input type="text" id="input-${s.key}" placeholder="e.g. Playfair Display" oninput="debounce('${s.key}')" autocomplete="off" spellcheck="false" />
+            </div>
+            <div class="field-group">
+              <label>Size</label>
+              <div class="size-wrap">
+                <input type="number" id="size-${s.key}" placeholder="—" min="6" max="200" oninput="gen()" />
+                <span class="unit">px</span>
+              </div>
+            </div>
+          </div>
           <span class="status hidden" id="status-${s.key}"></span>
         </div>
         <div class="preview-pill" id="preview-${s.key}" style="display:none;">
@@ -441,24 +407,17 @@
 
   // ── DA Preset ─────────────────────────────────────────────
   function applyDA(key) {
-    // Uncheck sameAs if on
     if (state[key].sameAs) {
       document.getElementById('same-' + key).checked = false;
       state[key].sameAs = false;
       document.getElementById('input-area-' + key).classList.remove('dimmed');
     }
-
     document.getElementById('input-' + key).value = DA.family;
-    state[key] = { family: DA.family, url: null, custom: DA.woff2, sameAs: false };
-
-    const statusEl = document.getElementById('status-' + key);
-    statusEl.textContent = 'DA brand font applied ✓';
-    statusEl.className = 'status found';
-
-    const ptext = document.getElementById('ptext-' + key);
-    ptext.style.fontFamily = "'California Palms', cursive";
+    state[key] = { ...state[key], family: DA.family, url: null, custom: DA.woff2, sameAs: false };
+    document.getElementById('status-' + key).textContent = 'DA brand font applied ✓';
+    document.getElementById('status-' + key).className = 'status found';
+    document.getElementById('ptext-' + key).style.fontFamily = "'California Palms', cursive";
     document.getElementById('preview-' + key).style.display = 'flex';
-
     gen();
   }
 
@@ -538,49 +497,60 @@
 
   // ── Generate output ───────────────────────────────────────
   function gen() {
-    const linkLines = [];
-    const usedUrls = new Set();
+    const linkLines  = [];
+    const usedUrls   = new Set();
     const usedCustom = new Set();
-    const cssRules = [];
+    const cssRules   = [];
     let needsPreconnect = true;
 
     SLOTS.forEach(s => {
       const st = state[s.key];
-      // Resolve effective state
       const effective = st.sameAs ? state['h1'] : st;
+      const size = document.getElementById('size-' + s.key).value.trim();
 
-      if (!effective.family) return; // nothing set, skip
+      const hasFont = !!effective.family;
+      const hasSize = !!size;
 
-      // Add font loading lines (deduplicated)
-      if (effective.custom && !usedCustom.has(effective.custom)) {
-        linkLines.push(
-          `  <style>\n    @font-face {\n      font-family: '${effective.family}';\n      src: url('${effective.custom}') format('woff2');\n      font-weight: normal;\n      font-style: normal;\n      font-display: swap;\n    }\n  </style>`
-        );
-        usedCustom.add(effective.custom);
-      } else if (effective.url && !usedUrls.has(effective.url)) {
-        if (needsPreconnect) {
-          linkLines.push(`  <link rel="preconnect" href="https://fonts.googleapis.com">`);
-          linkLines.push(`  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>`);
-          needsPreconnect = false;
+      if (!hasFont && !hasSize) return;
+
+      // Font loading tags
+      if (hasFont) {
+        if (effective.custom && !usedCustom.has(effective.custom)) {
+          linkLines.push(
+            `  <style>\n    @font-face {\n      font-family: '${effective.family}';\n      src: url('${effective.custom}') format('woff2');\n      font-weight: normal;\n      font-style: normal;\n      font-display: swap;\n    }\n  </style>`
+          );
+          usedCustom.add(effective.custom);
+        } else if (effective.url && !usedUrls.has(effective.url)) {
+          if (needsPreconnect) {
+            linkLines.push(`  <link rel="preconnect" href="https://fonts.googleapis.com">`);
+            linkLines.push(`  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>`);
+            needsPreconnect = false;
+          }
+          linkLines.push(`  <link href="${effective.url}" rel="stylesheet">`);
+          usedUrls.add(effective.url);
         }
-        linkLines.push(`  <link href="${effective.url}" rel="stylesheet">`);
-        usedUrls.add(effective.url);
       }
 
-      const fallback = s.key === 'p' ? 'sans-serif' : (effective.custom ? 'cursive' : 'serif');
-      cssRules.push(`    ${s.tag} {\n      font-family: '${effective.family}', ${fallback} !important;\n    }`);
+      // CSS rule
+      const props = [];
+      if (hasFont) {
+        const fallback = s.key === 'p' ? 'sans-serif' : (effective.custom ? 'cursive' : 'serif');
+        props.push(`      font-family: '${effective.family}', ${fallback} !important;`);
+      }
+      if (hasSize) {
+        props.push(`      font-size: ${size}px !important;`);
+      }
+      cssRules.push(`    ${s.tag} {\n${props.join('\n')}\n    }`);
     });
 
     if (linkLines.length === 0 && cssRules.length === 0) {
       document.getElementById('output').textContent =
-        '<!-- Enter a font name above to generate your header HTML -->';
+        '<!-- Enter a font name or size above to generate your header HTML -->';
       return;
     }
 
     const head = linkLines.length > 0 ? linkLines.join('\n') + '\n\n' : '';
-    const css  = cssRules.length  > 0
-      ? `  <style>\n${cssRules.join('\n\n')}\n  </style>`
-      : '';
+    const css  = cssRules.length  > 0 ? `  <style>\n${cssRules.join('\n\n')}\n  </style>` : '';
 
     document.getElementById('output').textContent =
 `<head>
